@@ -8,7 +8,7 @@ Material oficial de la cátedra **Bases de Datos I** de la Universidad Tecnológ
 Dentro del repositorio encontrarás una carpeta llamada:
 
 ```
-estudiante/
+alumnos/
 ```
 
 En dicha carpeta, **cada alumno deberá crear su propia carpeta personal** utilizando el siguiente formato obligatorio:
