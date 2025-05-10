@@ -1,0 +1,66 @@
+CREATE TABLE paciente(
+    id_paciente INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    apellido VARCHAR(50) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    dni VARCHAR(20) UNIQUE NOT NULL,
+    fecha_de_nacimiento DATE NOT NULL,
+    telefono VARCHAR(50),
+    numero_obra_social VARCHAR(50),
+    obra_social VARCHAR(50)
+);
+
+CREATE TABLE historial_paciente(
+    id_historial INT AUTO_INCREMENT PRIMARY KEY,
+    fecha_de_creacion DATE NOT NULL,
+    diagnostico TEXT,
+    tratamientos TEXT,
+    observaciones TEXT,
+    id_paciente INT,
+    FOREIGN KEY (id_paciente) REFERENCES paciente(id_paciente)
+);
+
+CREATE TABLE consulta(
+    id_consulta INT AUTO_INCREMENT PRIMARY KEY,
+    horario TIME NOT NULL,
+    fecha DATE NOT NULL,
+    telefono VARCHAR(20),
+    motivo TEXT,
+    observaciones TEXT,
+    matricula INT,
+    id_paciente INT,
+    FOREIGN KEY (matricula) REFERENCES medico(matricula),
+    FOREIGN KEY (id_paciente) REFERENCES paciente(id_paciente)
+);
+
+CREATE TABLE medico(
+    matricula INT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    apellido VARCHAR(50) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    dni VARCHAR(20) UNIQUE NOT NULL,
+    telefono VARCHAR(50),
+    especialidad VARCHAR(50)
+);
+
+CREATE TABLE detalle_receta(
+    id_detalle INT AUTO_INCREMENT PRIMARY KEY,
+    indicaciones TEXT,
+    id_medicamento INT,
+    id_receta INT,
+    FOREIGN KEY (id_medicamento) REFERENCES medicamento(id_medicamento),
+    FOREIGN KEY (id_receta) REFERENCES receta(id_receta)
+);
+
+CREATE TABLE receta(
+    id_receta INT PRIMARY KEY,
+    fecha_emision DATE NOT NULL,
+    descripcion TEXT,
+    matricula INT,
+    FOREIGN KEY (matricula) REFERENCES medico(matricula)
+);
+
+CREATE TABLE medicamento(
+    id_medicamento INT PRIMARY KEY,
+    nombre_medicamento VARCHAR(100) NOT NULL
+);

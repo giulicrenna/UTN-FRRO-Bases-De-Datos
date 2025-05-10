@@ -1,0 +1,1 @@
+Diseñar una base de datos para una empresa de venta de autos. El sistema debe contemplar la gestión de vehículos (nuevos y usados), clientes, vendedores y ventas. El trabajo consiste en crear el modelo entidad-relación (DER), el modelo relacional lógico y el modelo físico (script SQL con CREATE TABLE).
