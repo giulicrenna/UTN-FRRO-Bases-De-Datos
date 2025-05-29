@@ -4,7 +4,7 @@
 
 ---
 
-## 📝 Enunciado: **Sistema de Gestión de Ciber**
+## Enunciado: **Sistema de Gestión de Ciber**
 
 El dueño de un ciber ubicado en Rosario ha digitalizado la gestión de su negocio, el cual incluye clientes frecuentes, computadoras numeradas, consumos por hora de uso y productos vendidos en el kiosquito. Para ayudarte a familiarizarte con los conceptos de bases de datos, te solicita que realices una serie de **consultas simples** sobre la información almacenada.
 
