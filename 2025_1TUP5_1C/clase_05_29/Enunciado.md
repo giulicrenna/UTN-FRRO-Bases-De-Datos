@@ -1,6 +1,6 @@
-# UTN - FRRO {align=center}
-## Técnicatura Universitaria en Programación {align=center}
-### Docente: Giuliano Crenna {align=center}
+# UTN - FRRO
+## Técnicatura Universitaria en Programación
+### Docente: Giuliano Crenna
 
 ---
 
