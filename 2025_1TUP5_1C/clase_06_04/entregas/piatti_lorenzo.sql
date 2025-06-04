@@ -96,14 +96,10 @@ SELECT
     v.fecha_venta,
     e.nombre AS nombre_empleado,
     e.apellido AS apellido_empleado
-FROM
-    clientes c
-JOIN
-    ventas v ON c.id_cliente = v.id_cliente
-JOIN
-    empleados e ON v.id_empleado = e.id_empleado
-ORDER BY
-    v.fecha_venta;
+FROM clientes c
+JOIN ventas v ON c.id_cliente = v.id_cliente
+JOIN empleados e ON v.id_empleado = e.id_empleado
+ORDER BY v.fecha_venta;
     
 -- Ejercicio 7
 
@@ -112,14 +108,10 @@ SELECT
     dv.cantidad,
     dv.precio_unitario,
     v.fecha_venta
-FROM
-    productos p
-JOIN
-    detalle_venta dv ON p.id_producto = dv.id_producto
-JOIN
-    ventas v ON dv.id_venta = v.id_venta
-ORDER BY
-    v.fecha_venta;
+FROM productos p
+JOIN detalle_venta dv ON p.id_producto = dv.id_producto
+JOIN ventas v ON dv.id_venta = v.id_venta
+ORDER BY v.fecha_venta;
     
 -- Ejercicio 8
 
