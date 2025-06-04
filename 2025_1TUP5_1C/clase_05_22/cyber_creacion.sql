@@ -1,0 +1,215 @@
+DROP DATABASE IF EXISTS ciber_rosarino;
+CREATE DATABASE ciber_rosarino CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE ciber_rosarino;
+
+CREATE TABLE clientes (
+    id_cliente INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    apellido VARCHAR(50) NOT NULL,
+    dni VARCHAR(10) UNIQUE NOT NULL,
+    telefono VARCHAR(20),
+    email VARCHAR(100),
+    fecha_registro DATE NOT NULL
+);
+
+CREATE TABLE computadoras (
+    id_pc INT AUTO_INCREMENT PRIMARY KEY,
+    numero_pc INT UNIQUE NOT NULL,
+    marca VARCHAR(50),
+    ram_gb INT,
+    estado ENUM('Disponible', 'En uso', 'Fuera de servicio') DEFAULT 'Disponible'
+);
+
+CREATE TABLE usos (
+    id_uso INT AUTO_INCREMENT PRIMARY KEY,
+    id_cliente INT NOT NULL,
+    id_pc INT NOT NULL,
+    fecha DATE NOT NULL,
+    hora_inicio TIME NOT NULL,
+    hora_fin TIME,
+    costo DECIMAL(6,2),
+    FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente),
+    FOREIGN KEY (id_pc) REFERENCES computadoras(id_pc)
+);
+
+CREATE TABLE productos (
+    id_producto INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    precio DECIMAL(6,2) NOT NULL,
+    stock INT NOT NULL
+);
+
+CREATE TABLE ventas (
+    id_venta INT AUTO_INCREMENT PRIMARY KEY,
+    id_cliente INT NOT NULL,
+    id_producto INT NOT NULL,
+    fecha DATE NOT NULL,
+    cantidad INT NOT NULL,
+    total DECIMAL(6,2) NOT NULL,
+    FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente),
+    FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
+);
+
+
+INSERT INTO clientes (nombre, apellido, dni, telefono, email, fecha_registro) VALUES
+('Lucía', 'Gómez', '34562123', '341-5551234', 'lucia.gomez@gmail.com', '2023-05-01'),
+('Pedro', 'Martínez', '29876123', '341-6667890', 'pedro.martinez@yahoo.com', '2023-04-15'),
+('María', 'Fernández', '31245678', '341-7774561', 'mariaf@hotmail.com', '2023-03-10'),
+('Juan', 'Pérez', '30123456', '341-3214567', 'juanperez@gmail.com', '2023-02-20'),
+('Sofía', 'López', '33112233', '341-6781234', 'sofia.lopez@gmail.com', '2023-01-18'),
+('Diego', 'Sánchez', '32554789', '341-9876543', 'dsanchez@mail.com', '2023-06-02'),
+('Laura', 'Ramírez', '33456789', '341-1237890', 'laura.ramirez@mail.com', '2023-07-08'),
+('Tomás', 'Acosta', '33998877', '341-3334567', 'tacosta@outlook.com', '2023-05-23'),
+('Valentina', 'Ruiz', '32765432', '341-8886543', 'valen.ruiz@gmail.com', '2023-03-12'),
+('Andrés', 'Molina', '34567890', '341-5557777', 'amolina@yahoo.com', '2023-02-17'),
+('Martina', 'Castro', '31324567', '341-4445556', 'mcastro@hotmail.com', '2023-01-21'),
+('Gonzalo', 'Luna', '32123456', '341-2223333', 'gonzalol@gmail.com', '2023-04-25'),
+('Julieta', 'Silva', '29998765', '341-1114444', 'jsilva@mail.com', '2023-03-03'),
+('Ramiro', 'Ortega', '33556677', '341-6662222', 'ramiroo@gmail.com', '2023-05-05'),
+('Camila', 'Sosa', '31445566', '341-7779999', 'camisosa@hotmail.com', '2023-04-01'),
+('Emilia', 'Vega', '31001122', '341-1010101', 'emivega@mail.com', '2023-03-20'),
+('Federico', 'Arias', '33221100', '341-2020202', 'fede.arias@mail.com', '2023-02-02'),
+('Agustina', 'Ríos', '30112233', '341-3030303', 'agurios@mail.com', '2023-01-11'),
+('Lucas', 'Benítez', '32233445', '341-4040404', 'lucasbenitez@gmail.com', '2023-06-11'),
+('Mauro', 'Paz', '34123344', '341-5050505', 'mauro.paz@hotmail.com', '2023-04-04'),
+('Tamara', 'Ibarra', '34554321', '341-6060606', 'tamibarra@mail.com', '2023-02-28'),
+('Matías', 'Herrera', '33001122', '341-7070707', 'matias.herrera@yahoo.com', '2023-03-07'),
+('Renata', 'Díaz', '34445566', '341-8080808', 'renatad@gmail.com', '2023-01-30'),
+('Franco', 'Leiva', '31889977', '341-9090909', 'franleiva@hotmail.com', '2023-04-19'),
+('Brenda', 'Gutiérrez', '32998877', '341-1112223', 'brendag@mail.com', '2023-03-28'),
+('Benjamín', 'Ponce', '34332211', '341-2323232', 'benja.ponce@gmail.com', '2023-06-09'),
+('Natalia', 'Domínguez', '31775566', '341-3434343', 'natalia.d@mail.com', '2023-05-31'),
+('Leandro', 'Peralta', '33661122', '341-4545454', 'leandro.p@gmail.com', '2023-04-12'),
+('Rocío', 'Navarro', '33117788', '341-5656565', 'rocio.navarro@mail.com', '2023-02-06'),
+('Nahuel', 'Cabrera', '31557788', '341-6767676', 'nahuelcab@gmail.com', '2023-01-03');
+
+
+INSERT INTO computadoras (numero_pc, marca, ram_gb, estado) VALUES
+(1, 'HP', 8, 'Disponible'),
+(2, 'Dell', 16, 'En uso'),
+(3, 'Lenovo', 4, 'Disponible'),
+(4, 'Asus', 8, 'Disponible'),
+(5, 'Acer', 16, 'Fuera de servicio'),
+(6, 'HP', 8, 'Disponible'),
+(7, 'Dell', 4, 'En uso'),
+(8, 'Lenovo', 8, 'Disponible'),
+(9, 'Asus', 16, 'Disponible'),
+(10, 'Acer', 8, 'Disponible'),
+(11, 'HP', 4, 'Disponible'),
+(12, 'Dell', 8, 'En uso'),
+(13, 'Lenovo', 16, 'Disponible'),
+(14, 'Asus', 8, 'Disponible'),
+(15, 'Acer', 4, 'Fuera de servicio'),
+(16, 'HP', 16, 'Disponible'),
+(17, 'Dell', 8, 'En uso'),
+(18, 'Lenovo', 4, 'Disponible'),
+(19, 'Asus', 8, 'Disponible'),
+(20, 'Acer', 16, 'Disponible'),
+(21, 'HP', 4, 'Disponible'),
+(22, 'Dell', 16, 'Disponible'),
+(23, 'Lenovo', 8, 'Disponible'),
+(24, 'Asus', 4, 'Disponible'),
+(25, 'Acer', 8, 'Disponible'),
+(26, 'HP', 16, 'Disponible'),
+(27, 'Dell', 8, 'En uso'),
+(28, 'Lenovo', 4, 'Disponible'),
+(29, 'Asus', 16, 'Disponible'),
+(30, 'Acer', 4, 'Disponible');
+
+-- INSERTS EN productos
+INSERT INTO productos (nombre, precio, stock) VALUES
+('Coca Cola 500ml', 450.00, 100),
+('Pepsi 500ml', 420.00, 80),
+('Agua Villavicencio 500ml', 300.00, 120),
+('Alfajor Jorgito', 250.00, 200),
+('Palito de la selva', 50.00, 300),
+('Puchos Marlboro', 950.00, 50),
+('Puchos Philip Morris', 870.00, 60),
+('Doritos', 600.00, 90),
+('Galletitas Pepitos', 520.00, 110),
+('Galletitas Chocolinas', 480.00, 100),
+('Fernet Branca 1882 200ml', 950.00, 30),
+('Speed', 400.00, 95),
+('Juguito Baggio', 200.00, 85),
+('Gaseosa Manaos', 250.00, 90),
+('Turrón Arcor', 180.00, 130),
+('Caramelos Sugus', 20.00, 500),
+('Tita', 240.00, 150),
+('Rhodesia', 240.00, 140),
+('Pipas', 120.00, 170),
+('Chocolate Águila', 650.00, 70),
+('Pochoclo dulce', 300.00, 60),
+('Gomitas Mogul', 270.00, 85),
+('Pico Dulce', 45.00, 200),
+('Chicles Topline', 90.00, 180),
+('Pochoclos', 250.00, 100),
+('Speed+Vodka', 1500.00, 20),
+('Baggio Multifruta', 320.00, 60),
+('Alfajor Fantoche', 270.00, 80),
+('Té Taragüí', 350.00, 40),
+('Mate Cocido', 300.00, 55);
+
+INSERT INTO usos (id_cliente, id_pc, fecha, hora_inicio, hora_fin, costo) VALUES
+(1, 5, '2023-06-10', '14:00:00', '15:30:00', 315.00),
+(2, 7, '2023-06-11', '17:15:00', '18:45:00', 315.00),
+(3, 1, '2023-06-12', '10:00:00', '11:00:00', 210.00),
+(4, 9, '2023-06-13', '12:30:00', '14:00:00', 315.00),
+(5, 2, '2023-06-14', '09:00:00', '10:30:00', 315.00),
+(6, 11, '2023-06-15', '15:45:00', '17:15:00', 315.00),
+(7, 14, '2023-06-16', '16:00:00', '17:00:00', 210.00),
+(8, 3, '2023-06-17', '18:00:00', '19:30:00', 315.00),
+(9, 18, '2023-06-18', '13:30:00', '14:30:00', 210.00),
+(10, 20, '2023-06-19', '11:00:00', '12:00:00', 210.00),
+(11, 6, '2023-06-20', '08:00:00', '09:45:00', 367.50),
+(12, 4, '2023-06-21', '17:30:00', '19:00:00', 315.00),
+(13, 8, '2023-06-22', '10:30:00', '12:00:00', 315.00),
+(14, 10, '2023-06-23', '13:00:00', '14:00:00', 210.00),
+(15, 12, '2023-06-24', '14:15:00', '15:15:00', 210.00),
+(16, 13, '2023-06-25', '09:30:00', '11:00:00', 315.00),
+(17, 15, '2023-06-26', '12:00:00', '13:30:00', 315.00),
+(18, 16, '2023-06-27', '15:00:00', '16:30:00', 315.00),
+(19, 17, '2023-06-28', '16:45:00', '18:15:00', 315.00),
+(20, 19, '2023-06-29', '11:15:00', '12:45:00', 315.00),
+(21, 21, '2023-07-01', '10:00:00', '11:30:00', 315.00),
+(22, 22, '2023-07-02', '13:00:00', '14:00:00', 210.00),
+(23, 23, '2023-07-03', '17:30:00', '19:00:00', 315.00),
+(24, 24, '2023-07-04', '14:45:00', '15:45:00', 210.00),
+(25, 25, '2023-07-05', '12:30:00', '14:00:00', 315.00),
+(26, 26, '2023-07-06', '09:15:00', '10:45:00', 315.00),
+(27, 27, '2023-07-07', '16:00:00', '17:30:00', 315.00),
+(28, 28, '2023-07-08', '15:00:00', '16:00:00', 210.00),
+(29, 29, '2023-07-09', '11:45:00', '13:15:00', 315.00),
+(30, 30, '2023-07-10', '10:30:00', '12:00:00', 315.00);
+
+INSERT INTO ventas (id_cliente, id_producto, fecha, cantidad, total) VALUES
+(1, 1, '2023-06-10', 1, 450.00),
+(2, 4, '2023-06-11', 2, 500.00),
+(3, 6, '2023-06-12', 1, 950.00),
+(4, 10, '2023-06-13', 1, 480.00),
+(5, 3, '2023-06-14', 2, 600.00),
+(6, 7, '2023-06-15', 1, 870.00),
+(7, 8, '2023-06-16', 1, 600.00),
+(8, 2, '2023-06-17', 1, 420.00),
+(9, 9, '2023-06-18', 2, 1040.00),
+(10, 5, '2023-06-19', 3, 150.00),
+(11, 11, '2023-06-20', 1, 950.00),
+(12, 12, '2023-06-21', 1, 400.00),
+(13, 13, '2023-06-22', 2, 400.00),
+(14, 14, '2023-06-23', 2, 500.00),
+(15, 15, '2023-06-24', 2, 360.00),
+(16, 16, '2023-06-25', 5, 100.00),
+(17, 17, '2023-06-26', 2, 480.00),
+(18, 18, '2023-06-27', 1, 240.00),
+(19, 19, '2023-06-28', 2, 240.00),
+(20, 20, '2023-06-29', 1, 650.00),
+(21, 21, '2023-07-01', 1, 300.00),
+(22, 22, '2023-07-02', 1, 270.00),
+(23, 23, '2023-07-03', 3, 135.00),
+(24, 24, '2023-07-04', 2, 180.00),
+(25, 25, '2023-07-05', 1, 250.00),
+(26, 26, '2023-07-06', 1, 1500.00),
+(27, 27, '2023-07-07', 1, 320.00),
+(28, 28, '2023-07-08', 2, 540.00),
+(29, 29, '2023-07-09', 1, 350.00),
+(30, 30, '2023-07-10', 1, 300.00);
+
