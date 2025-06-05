@@ -175,6 +175,12 @@ INSERT INTO detalle_ventas (id_venta, id_producto, cantidad, precio_unitario) VA
 (19, 17, 1, 2200.00),
 (20, 11, 1, 11500.00);
 
+INSERT INTO empleados (nombre, apellido, fecha_ingreso, cargo)
+VALUES 
+('Lucía', 'Gómez', '2022-03-15', 'Analista de Datos'),
+('Martín', 'Pérez', '2023-07-01', 'Desarrollador Backend'),
+('Carla', 'Fernández', '2021-11-20', 'Responsable de RRHH');
+
 
 -- Simulacro de Parcial
 -- UTN - Base de Datos I
